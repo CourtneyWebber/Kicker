@@ -1,0 +1,34 @@
+grade_id,grade_name
+1,AMEB Preliminary
+2,AMEB Grade 1
+3,AMEB Grade 2
+4,AMEB Grade 3
+5,AMEB Grade 4
+6,AMEB Grade 5
+7,AMEB Grade 6
+8,AMEB Grade 7
+9,AMEB Grade 8
+10,AMEB AMusA
+11,AMEB LMusA
+12,AMEB FMusA
+13,ABRSM Initial Grade
+14,ABRSM Grade 1
+15,ABRSM Grade 2
+16,ABRSM Grade 3
+17,ABRSM Grade 4
+18,ABRSM Grade 5
+19,ABRSM Grade 6
+20,ABRSM Grade 7
+21,ABRSM Grade 8
+22,NZMEB Preliminary
+23,NZMEB Grade 1
+24,NZMEB Grade 2
+25,NZMEB Grade 3
+26,NZMEB Grade 4
+27,NZMEB Grade 5
+28,NZMEB Grade 6
+29,NZMEB Grade 7
+30,NZMEB Grade 8
+31,NZMEB AMusNZ
+32,NZMEB LMusNZ
+33,Ungraded
