@@ -1,9 +1,3 @@
--- Get user_id and password from database to compare to input. (need to investigate login)
-SELECT user_id, user_password
-FROM users
-WHERE user_username = @username
-AND user_password = @`password`;
-
 -- Insert data into user table.
 CALL usp_InsertUser("s", "Sally", "Walker", "0404040404", "swalker@gmail.com", "WalkyMcWalkface", "Password", 1);
 -- works
@@ -93,3 +87,4 @@ CALL usp_UpdateGoal(21, "Updating the description of this goal", 0, null);
 CALL usp_GetSessionDetails(1);
 CALL usp_GetSessionsAvg(4, @smiley_avg);
 SELECT @smiley_avg;
+-- works in two steps
