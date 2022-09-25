@@ -73,3 +73,48 @@ User.findAll = (result) => {
         }
     });
 }
+
+User.getStudentList = (id, result) => {
+    dbCon.query(`CALL usp_GetActiveStudentsForTeacher(${id})`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            console.log("found students: ", res);
+            result(null, res);
+            return;
+        }
+    });
+}
+
+User.getStudentInstruments = (name, id, result) => {
+    dbCon.query(`CALL usp_GetInstrumentsForUser("${name}", ${id})`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            console.log("found student instrument(s): ", res);
+            result(null, res);
+            return;
+        }
+    });
+}
+
+User.getStudentIds = (student_name, instrument_name, teacher_id, result) => {
+    dbCon.query(`CALL usp_GetStudentIds("${student_name}", "${instrument_name}", ${teacher_id})`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            console.log("found student ids: ", res);
+            result(null, res);
+            return;
+        }
+    });
+}

@@ -45,6 +45,42 @@ exports.findAll = (req, res) => {
     });
 };
 
+// Retrieve all students for a specific teacher id.
+exports.getStudentList = (req, res) => {    
+    User.getStudentList(req.query.user_id, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while getting the student list."
+            });
+        else res.send(data);
+    });
+};
+
+// Get student_id and instrument_id from teacher_id, student_name, instrument_name
+exports.getStudentIds = (req, res) => {
+    User.getStudentIds(req.query.student_name, req.query.instrument_name, req.query.teacher_id, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while getting the students' ids."
+            });
+        else res.send(data);
+    });
+};
+
+//Get all instruments for a student and teacher combo
+exports.getStudentInstruments = (req, res) => {
+    User.getStudentInstruments(req.query.student_name, req.query.teacher_id, (err, data) => {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while getting the student's instrument(s)."
+            });
+        else res.send(data);
+    });
+};
+
 // Find and validate a single user with a username
 exports.validateLogin = (req, res) => {
     if (!req.body) {

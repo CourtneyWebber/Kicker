@@ -10,9 +10,10 @@ app.use(cors(corsOptions));
 const port = process.env.PORT || 4000; //back-end on 4000.
 
 app.use(express.json());
-//middleware to read req.body.<params>
 
 require('./routes/user_routes.js')(app);
+require('./routes/grade_routes.js')(app);
+require('./routes/goal_routes.js')(app);
 
 app.listen(port,
     () => console.log(`Server Started on port ${port}...`))
