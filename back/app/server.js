@@ -3,7 +3,7 @@ const cors = require("cors");
 const app = express();
 
 const corsOptions = {
-    origin: "http://localhost:3000" //front-end (react) running on 3000.
+    origin: "http://localhost:3000" //front-end (react) running on 3000. Allows connection between front and back end.
 };
 app.use(cors(corsOptions));
 

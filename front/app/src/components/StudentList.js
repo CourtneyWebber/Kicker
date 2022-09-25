@@ -12,10 +12,11 @@ const columns = [
     { field: 'goal_total', headerName: 'Total Goals Kicked', width: 150 }
 ];
 
-export default function StudentList(props) {
+export default function StudentList(props) {//Getting props from Dashboard_Teacher so as to cause rerender
     const [students, setStudents] = useState([]);
     const rows = students;
 
+    //Getting list of students for a specific teacher
     useEffect(() => {
         axios.get('http://localhost:4000/api/users/studentlist?user_id=' + localStorage.getItem("userId"))
             .then(response => {

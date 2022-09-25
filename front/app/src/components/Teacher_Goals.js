@@ -30,6 +30,7 @@ import Title from './Title';
 
 const date = Moment().format("dddd, Do MMM, YYYY");
 
+//Logout button clears current user and redirects to signin page
 const logOut = () => {
     localStorage.clear();
 };
@@ -80,7 +81,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export const IdContext = createContext();
+export const IdContext = createContext();   //Creating a context to pass student_id and instrument_id to other components.
 
 function DashboardContent() {
     const [open, setOpen] = React.useState(false);
@@ -114,6 +115,7 @@ function DashboardContent() {
         setInstrumentIndex(index);
         setAnchorEl_instrument(null);
         setIsClicked(true);
+        //Getting student_id and instrument_id for a specific teacher_id, student_name, instrument_name.
         axios.get('http://localhost:4000/api/users/studentids?student_name=' + nameArray[studentIndex] + '&teacher_id=' + localStorage.getItem("userId") + '&instrument_name=' + instruments[index].instrument_name)
             .then(response => {
                 setStudentIds(response.data[0]);
@@ -121,6 +123,7 @@ function DashboardContent() {
             .catch((e) => {
                 console.log(e);
             });
+        //Getting the current goals for a specific student/instrument/teacher combo.
         axios.get('http://localhost:4000/api/goals?student_name=' + nameArray[studentIndex] + '&teacher_id=' + localStorage.getItem("userId") + '&instrument_name=' + instruments[index].instrument_name)
             .then(response => {
                 let goalList = response.data[0];
@@ -138,6 +141,7 @@ function DashboardContent() {
     let nameArray = [...new Set(names)];    //removing duplicates
 
     useEffect(() => {
+        //Getting list of students for a specific teacher.
         axios.get('http://localhost:4000/api/users/studentlist?user_id=' + localStorage.getItem("userId"))
             .then(response => {
                 let studentList = response.data;
@@ -148,6 +152,7 @@ function DashboardContent() {
     const handleClickStudent = (event, index) => {
         setStudentIndex(index);
         setAnchorEl_student(null);
+        //Getting the instrument(s) for a specific student/teacher combination.
         axios.get('http://localhost:4000/api/users/studentinst?student_name=' + nameArray[index] + '&teacher_id=' + localStorage.getItem("userId"))
             .then(response => {
                 let instList = response.data;

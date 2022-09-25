@@ -20,7 +20,7 @@ export default function StudentSelect(props) {
     const [grades, setGrades] = useState([]);
     const [gradeId, setGradeId] = useState([]);
 
-    const [isClicked, setIsClicked] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);  //Using to determine when/if to render instrument list (instead of it automatically picking the first one etc)
 
     let names = [""];
     for (let i = 0; i < students.length; i++) {
@@ -28,12 +28,14 @@ export default function StudentSelect(props) {
     }
     let nameArray = [...new Set(names)];    //removing duplicates
 
+    //Getting list of students for a specific teacher
     useEffect(() => {
         axios.get('http://localhost:4000/api/users/studentlist?user_id=' + localStorage.getItem("userId"))
             .then(response => {
                 let studentList = response.data;
                 setStudents(studentList[0]);
             });
+        //Gets the list of grades
         axios.get('http://localhost:4000/api/grades/')
             .then(response => {
                 let gradeList = response.data;
@@ -75,6 +77,7 @@ export default function StudentSelect(props) {
     const handleClickStudent = (event, index) => {
         setStudentIndex(index);
         setAnchorEl_student(null);
+        //Getting the instrument(s) for a given student/teacher combo.
         axios.get('http://localhost:4000/api/users/studentinst?student_name=' + nameArray[index] + '&teacher_id=' + localStorage.getItem("userId"))
             .then(response => {
                 let instList = response.data;
@@ -86,6 +89,7 @@ export default function StudentSelect(props) {
     const handleClickGrade = (event, index) => {
         setGradeIndex(index);
         setAnchorEl_grade(null);
+        //Getting the id of the grade name that is selected.
         axios.get('http://localhost:4000/api/grades/id?grade_name=' + grades[index].grade_name)
             .then(response => {
                 let id = response.data;
@@ -93,6 +97,7 @@ export default function StudentSelect(props) {
             });
     };
 
+    //Updating the grade for a specific student/instrument/teacher combo.
     const handleSave = () => {
         axios.put('http://localhost:4000/api/grades/update?student_name=' + nameArray[studentIndex] + '&instrument_name=' + instruments[instrumentIndex].instrument_name + '&teacher_id=' + localStorage.getItem("userId") + '&grade_id=' + gradeId)
             .then(response => {

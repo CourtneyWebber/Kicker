@@ -14,22 +14,23 @@ import { mdTheme } from './theme.js';
 import { Copyright } from './copyright';
 import axios from 'axios';
 
+//TODO: This is a work in progress
+
 export default function SignIn() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [user, setUser] = useState();    
     
     const navigate = useNavigate();
     const nav = () => {
         if (localStorage.getItem("userType") === "s" && localStorage.getItem("isLoggedIn") === "true") {
             console.log("Hey");
-            navigate('/student'); //why won't this go unless refreshing the page? Something to do with the local storage?
+            navigate('/student');
         }
         else if (localStorage.getItem("userType") === "t" && localStorage.getItem("isLoggedIn") === "true") {
             console.log("Yo");
-            navigate('/teacher'); //why won't this go unless refreshing the page? Something to do with the local storage?
+            navigate('/teacher');
         }
-    }
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -38,12 +39,12 @@ export default function SignIn() {
             user_username: username,
             user_password: password
         };
-        console.log(userData);
 
-        //validating username and password
+        //Validating username and password by comparing to the database
         await axios.post(`http://localhost:4000/api/users/login`, userData)
             .then((response) => {
                 let loggedInUser = response.data;
+                //Setting logged in user details in localStorage for access across the app.
                 localStorage.setItem("userId", loggedInUser.user_id);
                 localStorage.setItem("username", loggedInUser.user_username);
                 localStorage.setItem("userType", loggedInUser.user_type);
@@ -52,6 +53,7 @@ export default function SignIn() {
                 localStorage.setItem("phone", loggedInUser.user_phone);
                 localStorage.setItem("email", loggedInUser.user_email);
                 localStorage.setItem("isLoggedIn", true);     
+                //Navigate to page based on user type.
                 nav();
             })
             .catch((error) => {
@@ -118,13 +120,9 @@ export default function SignIn() {
                             Sign In
                         </Button>
                         <Grid container>
-                            <Grid item xs>
-                               
+                            <Grid item xs>                               
                             </Grid>
-                            <Grid item>
-                                {/*<Link href="#" variant="body2">*/}
-                                {/*    {"Don't have an account? Sign Up"}*/}
-                                {/*</Link>*/}
+                            <Grid item>                                
                             </Grid>
                         </Grid>
                     </Box>

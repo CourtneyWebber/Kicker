@@ -7,6 +7,8 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import SportsScoreIcon from '@mui/icons-material/SportsScore';
 import { Link } from 'react-router-dom';
 
+//Provides the menu items for the left-hand side menu. Differences based on user type.
+
 export const studentListItems = (
     <React.Fragment>
         <ListItemButton component={Link} to="/student">

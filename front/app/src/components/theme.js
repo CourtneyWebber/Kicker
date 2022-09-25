@@ -1,5 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 
+//Theme created to complement the logo colours. Shared with multiple components.
 export const mdTheme = createTheme({
     palette: {
         primary: {

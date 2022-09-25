@@ -25,6 +25,8 @@ import Moment from 'moment';
 import { mdTheme } from './theme.js';
 import { Copyright } from './copyright';
 
+//TODO: This is a work in progress
+
 const date = Moment().format("dddd, Do MMM, YYYY");
 const drawerWidth = 240;
 

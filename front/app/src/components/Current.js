@@ -11,11 +11,11 @@ import Moment from 'moment';
 import { IdContext } from './Teacher_Goals';
 
 export default function Current(props) {
-    const rows = props.sendGoals;
-    const [value, setValue] = useState("");
-    const [description, setDescription] = useState("");
+    const rows = props.sendGoals;   //getting the goals from Teacher_Goals
+    const [value, setValue] = useState(""); //Using this to set whether the Update and Delete buttons render
+    const [description, setDescription] = useState(""); //is set onChange
     const date = Moment().format("YYYY-MM-DD");    
-    const ids = useContext(IdContext);
+    const ids = useContext(IdContext);  //Getting context from Teacher_Goals with the student_id and instrument_id of the selected student and instrument names.
 
     let studentId;
     let instrumentId;
@@ -25,6 +25,7 @@ export default function Current(props) {
         instrumentId = ids[0].instrument_id;
     }
 
+    //Data to be passed into 'add' route
     const newGoal = {
         goal_description: description,
         goal_startdate: date,
@@ -35,10 +36,11 @@ export default function Current(props) {
         instrument_id: instrumentId
     }
 
+    //Post a new goal to the database
     const handleClick_add = () => {
         axios.post('http://localhost:4000/api/goals/add', newGoal)
             .then(response => {
-                setDescription("");
+                setDescription(""); //Sets to empty string to remove input in the UI
                 console.log(response);
             })
             .catch((e) => {
@@ -46,6 +48,7 @@ export default function Current(props) {
             });
     };
 
+    //Updates a goal in the database to "completed", thus removing it from the current goals list to the completed goals list.
     const handleComplete = () => {
         axios.put('http://localhost:4000/api/goals/update?goal_id=' + value + '&goal_iscomplete=true')
             .then((response) => {
@@ -58,6 +61,7 @@ export default function Current(props) {
         setValue(0);
     };
 
+    //Deletes the selected goal based on goal_id
     const handleDelete = () => {
         axios.delete('http://localhost:4000/api/goals/delete?goal_id=' + value)
             .then(() => {
@@ -70,8 +74,7 @@ export default function Current(props) {
     };
 
     const handleChange = (event) => {
-        setValue(event.target.value);
-        
+        setValue(event.target.value);        //When the selection of radiobutton changes, 'value' becomes the selected value, and thus the goal_id is obtained for the above functionality.
     };
 
     return (

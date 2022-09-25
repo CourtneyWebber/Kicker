@@ -27,6 +27,7 @@ const rows = [
     )
 ];
 
+//Basic table showing cumulative goals.
 export default function Count() {
     return (
         <React.Fragment>

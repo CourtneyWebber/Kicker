@@ -23,7 +23,9 @@ import StudentList from './StudentList';
 import { Copyright } from './copyright';
 import { mdTheme } from './theme.js';
 
-const date = Moment().format("dddd, Do MMM, YYYY");
+const date = Moment().format("dddd, Do MMM, YYYY"); //formatting the current date to display in the UI
+
+//Dashboard template with modifications
 const drawerWidth = 240;
 
 const AppBar = styled(MuiAppBar, {
@@ -70,15 +72,16 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
+//When the Log Out link is clicked, current user is no longer stored and is redirected to the Sign In page.
 const logOut = () => {
     localStorage.clear();
 };
 
 function DashboardContent() {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);  //Set to false so that the default is closed (my preference).
     const userID = localStorage.getItem("userId");
     const username = localStorage.getItem("username");
-    const [updated, setUpdated] = React.useState(false);
+    const [updated, setUpdated] = React.useState(false);    //Passing in props to trigger rerender in child components
     const toggleDrawer = () => { setOpen(!open); };
 
     return (

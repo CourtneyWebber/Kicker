@@ -9,7 +9,7 @@ import axios from 'axios';
 
 export default function Previous() {
     const [goals, setGoals] = useState([]);
-    const ids = useContext(IdContext);
+    const ids = useContext(IdContext);  //Getting student_id and instrument_id from Teacher_Goals.
     let studentId;
     let instrumentId;
 
@@ -18,6 +18,7 @@ export default function Previous() {
         instrumentId = ids[0].instrument_id;
     }
 
+    //Getting previously completed goals for a specific student/instrument/teacher combination.
     useEffect(() => {
         axios.get('http://localhost:4000/api/goals/completed?teacher_id=' + localStorage.getItem("userId") + '&student_id=' + studentId + '&instrument_id=' + instrumentId)
             .then(response => {
