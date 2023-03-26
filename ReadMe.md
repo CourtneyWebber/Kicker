@@ -35,6 +35,3 @@ Password: Waxoff
 Contributors
 Thanks to the following people who have contributed to this project:
 Jo Batkin - Invaluable advice and troubleshooting support.
-
-Contact
-If you want to contact me you can reach me at cbwebber@hotmail.com
